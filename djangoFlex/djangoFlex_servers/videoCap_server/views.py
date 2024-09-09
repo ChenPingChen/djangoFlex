@@ -4,7 +4,7 @@ from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from django.utils.decorators import method_decorator
-from .services.videoCap_service import VideoCapService
+from .services.VideoCapService import VideoCapService
 from .models import VideoCapConfig
 
 video_cap_service = VideoCapService()
@@ -57,37 +57,3 @@ class VideoCapServerView(APIView):
             {'message': message},
             status=status.HTTP_200_OK if success else status.HTTP_500_INTERNAL_SERVER_ERROR
         )
-
-    # @swagger_auto_schema(
-    #     method='get',
-    #     operation_description="Get the status of all Video Capture servers.",
-    #     responses={
-    #         200: openapi.Response(
-    #             description="Successfully retrieved the status of all servers.",
-    #             schema=openapi.Schema(
-    #                 type=openapi.TYPE_OBJECT,
-    #                 properties={
-    #                     'servers': openapi.Schema(
-    #                         type=openapi.TYPE_ARRAY,
-    #                         items=openapi.Schema(
-    #                             type=openapi.TYPE_OBJECT,
-    #                             properties={
-    #                                 'rtmp_url': openapi.Schema(type=openapi.TYPE_STRING),
-    #                                 'is_running': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-    #                             }
-    #                         )
-    #                     )
-    #                 }
-    #             )
-    #         )
-    #     }
-    # )
-    # def get(self, request):
-    #     servers_status = []
-    #     for config in VideoCapConfig.objects.all():
-    #         is_running = video_cap_service.check_server_status(config.rtmp_url)
-    #         servers_status.append({
-    #             'rtmp_url': config.rtmp_url,
-    #             'is_running': is_running
-    #         })
-    #     return Response({'servers': servers_status}, status=status.HTTP_200_OK)
